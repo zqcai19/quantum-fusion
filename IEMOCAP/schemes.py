@@ -65,9 +65,9 @@ def evaluate(model, data_loader, args):
 def Scheme(design):
     args = Arguments()
     if torch.cuda.is_available() and args.device == 'cuda':
-        print("\nusing cuda device", end=' ')
+        print("using cuda device")
     else:
-        print("\nusing cpu device", end=' ')
+        print("using cpu device")
     train_loader, val_loader, test_loader = IEMOCAPDataLoaders(args)
     model = QNet(args, design).to(args.device)
     criterion = nn.CrossEntropyLoss(reduction='sum')
@@ -79,7 +79,6 @@ def Scheme(design):
         {'params': model.QuantumLayer.parameters(), 'lr': args.qlr},
         {'params': model.Classifier.parameters()}
         ], lr=args.clr)
-    get_param_num(model)
     train_loss_list, val_loss_list = [], []
     best_val_loss = 10000
     for epoch in range(args.epochs):
