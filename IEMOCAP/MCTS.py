@@ -157,14 +157,14 @@ class MCTS:
                 self.DISPATCHED_JOB[job_str] = acc
                 self.samples[job_str]        = acc
                 self.acc_list.append(acc)
-                print("acc: {}".format(acc))
+                print("\nacc: {}".format(acc))
                 with open('results.csv', 'a+', newline='') as res:
                     writer = csv.writer(res)
                     best_val_loss = report['best_val_loss']
                     metrics = report['metrics']
                     writer.writerow([len(self.samples), job_str, sample_node, best_val_loss,
                                      metrics['acc'], metrics['f1']])
-                print("\nresults of current model saved")
+                print("results of current model saved")
                 # save all models and reports
                 torch.save(best_model.state_dict(), 'models/model_weights_'+str(len(self.samples))+'.pth')
                 with open('reports/report_'+str(len(self.samples)), 'wb') as file:
