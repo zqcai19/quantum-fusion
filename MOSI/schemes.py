@@ -110,6 +110,8 @@ def Scheme(design):
 
 
 if __name__ == '__main__':
-    net = [0, 0, 2, 2, 1, 0, 2, 0, 0, 1, 1, 0, 1, 1, 0, 6, 0, 1, 4, 3, 2, 2]
+    with open('search_space', 'rb') as file:
+        search_space = pickle.load(file)
+    net = random.choice(search_space)
     design = translator(net)
     best_model, report = Scheme(design)
